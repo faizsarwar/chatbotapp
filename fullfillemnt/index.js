@@ -19,7 +19,7 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
     const agent=new WebhookClient({request:request,response:response});
         
     function fallback(agent){
-        agent.add("please choose below services"); //
+        agent.add("please choose below services \n haircut , bathe, boarding, dog training, health"); //
         agent.add(new Suggestion("haircut"))  //
         agent.add(new Suggestion("bathe"))  //
         agent.add(new Suggestion("boarding"))  //
