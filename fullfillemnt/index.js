@@ -18,7 +18,7 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
     const agent=new WebhookClient({request:request,response:response});
     
     function fallback(agent){
-        agent.add("your bot does not understand this");
+        // agent.add("your bot does not understand this");
         agent.add(new Suggestions(["haircut"]))
     }
 
