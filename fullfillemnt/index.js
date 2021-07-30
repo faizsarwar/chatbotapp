@@ -21,7 +21,17 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
     }
 
     function welcome(agent){
-        agent.add("Hello . I am a chatbot from Dog gromming services . We offer dog hair cut, dog grooming, dog spa ,dog bathe ,dog health , dog boarding and dog behavioral training");
+        agent.add(`We provide a variety of services
+            Dog grooming, dog spa, dog behavioural training
+            
+            Dog grooming: full shave or customised? Please provide details.
+            
+            Dog spa: basic spa where doggy is immersed in beneficial herbs
+            Premium spa where doggy massage is given  to aid in blood circulation and muscle relaxation
+            
+            Dog behavioural training : train in peeing on pee pad or pee tray 
+            Train to behave in public
+            Train to walk without leash`);
     }
 
     function bathe(agent){
