@@ -1,4 +1,5 @@
-const { Suggestions } = require("actions-on-google");
+const {Suggestions} = require('actions-on-google');
+const {Suggestion} = require("dialogflow-fulfillment");
 const {WebhookClient, Suggestion}=require("dialogflow-fulfillment");
 const { request, response } = require("express");
 const express=require("express");
@@ -18,8 +19,8 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
     const agent=new WebhookClient({request:request,response:response});
     
     function fallback(agent){
-        // agent.add("your bot does not understand this");
-        agent.add(new Suggestions(["haircut"]))
+        agent.add("your bot does not understand this");
+        agent.add(new Suggestion("haircut","bathe","health","boarding","dog training"))
     }
 
     function welcome(agent){
