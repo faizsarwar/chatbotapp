@@ -20,7 +20,8 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
     
     function fallback(agent){
         agent.add("your bot does not understand this");
-        agent.add(new Suggestion("haircut","bathe","health","boarding","dog training"))
+        agent.add(new Suggestion("haircut"))
+        agent.add(new Suggestion("bathe"));
     }
 
     function welcome(agent){
