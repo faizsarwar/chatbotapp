@@ -1,7 +1,6 @@
 const {WebhookClient}=require("dialogflow-fulfillment");
 const { request, response } = require("express");
 const express=require("express");
-const request1 = require('request');
 const app=express();
 
 
@@ -45,6 +44,7 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
     agent.handleRequest(intentMap)
 })
 
-app.listen(4000,()=>{
+const port = process.env.PORT || 4000
+app.listen(port,()=>{
     console.log("server is up on 4000")
 })
