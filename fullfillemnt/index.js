@@ -85,6 +85,7 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
         let breed=agent.parameters["any"];
         let height=agent.parameters["unit-length"];  
         let phone_number=agent.parameters["phone-number"];
+        let age =agent.parameters["age"];
         // console.log(typeof(height),height)
         console.log("Package is   Premium","\n" + "breed is   "+breed,"\n" + "Phone number is    "+phone_number+"\n","hieght is    ",height)          
 
@@ -108,6 +109,8 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
         let breed=agent.parameters["any"];
         let height=agent.parameters["unit-length"];  
         let phone_number=agent.parameters["phone-number"];
+        let age =agent.parameters["age"];
+
         // console.log(typeof(height),height)
         console.log("Package is   Basic","\n" + "breed is   "+breed,"\n" + "Phone number is    "+phone_number+"\n","hieght is    ",height)          
 
@@ -122,7 +125,8 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
             console.log("sucessfuly write into db"+snapshot.ref.toString());
             agent.add("your query is registered you will recive sms shortly on ",phone_number);
 
-        }).catch();  
+        }).catch();
+  
     }
 
 
@@ -132,6 +136,11 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
         let height=agent.parameters["unit-length"];  
         let phone_number=agent.parameters["phone-number"];
         // console.log(typeof(height),height)
+        let age =agent.parameters["age"];
+        let de_wormed=agent.parameters["de-wormed"];
+        let de_ticked=agent.parameters["de-ticked"];
+        let vaccinated=agent.parameters["vaccinated"]
+        
         console.log("Package is   Basic","\n" + "breed is   "+breed,"\n" + "Phone number is    "+phone_number+"\n","hieght is    ",height)          
 
 
@@ -140,7 +149,10 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
             "breed":breed,
             "height":height,
             "phone number":phone_number,
-            "age":age
+            "age":age,
+            "vaccinated":vaccinated,
+            "de_ticked":de_ticked,
+            "de_wormed":de_wormed
         }).then((snapshot)=>{
             console.log("sucessfuly write into db"+snapshot.ref.toString());
             agent.add("your query is registered you will recive sms shortly on ",phone_number);
@@ -154,12 +166,15 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
         let breed=agent.parameters["any"];
         let height=agent.parameters["unit-length"];  
         let phone_number=agent.parameters["phone-number"];
+        let age =agent.parameters["age"];
+        let haircu_type=agent.parameters["haircut"];
         // console.log(typeof(height),height)
         console.log("Package is   Basic","\n" + "breed is   "+breed,"\n" + "Phone number is    "+phone_number+"\n","hieght is    ",height)          
 
 
         return admin.database().ref("/users").push({
             "service":"haircut",
+            "haircut_type":haircu_type,
             "breed":breed,
             "height":height,
             "phone number":phone_number,
@@ -178,6 +193,7 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
         let height=agent.parameters["unit-length"];  
         let phone_number=agent.parameters["phone-number"];
         // console.log(typeof(height),height)
+        let age =agent.parameters["age"];
         console.log("Package is   Basic","\n" + "breed is   "+breed,"\n" + "Phone number is    "+phone_number+"\n","hieght is    ",height)          
 
         return admin.database().ref("/users").push({
@@ -200,6 +216,8 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
         let height=agent.parameters["unit-length"];  
         let phone_number=agent.parameters["phone-number"];
         // console.log(typeof(height),height)
+        let age =agent.parameters["age"];
+
         console.log("Package is   Basic","\n" + "breed is   "+breed,"\n" + "Phone number is    "+phone_number+"\n","hieght is    ",height)          
 
         return admin.database().ref("/users").push({
