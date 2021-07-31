@@ -21,7 +21,7 @@ try{
 }
 catch{
     console.log("database disconnected")
-
+}
 
 
 
@@ -229,7 +229,8 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
     agent.handleRequest(intentMap)
 })
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 4000;
+
 app.listen(port,()=>{
-    console.log("server is up on 4000")
+    console.log("server is up on 4000");
 })
