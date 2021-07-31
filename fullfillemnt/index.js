@@ -202,7 +202,6 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
         // console.log(typeof(height),height)
         console.log("Package is   Basic","\n" + "breed is   "+breed,"\n" + "Phone number is    "+phone_number+"\n","hieght is    ",height)          
 
-
         return admin.database().ref("/users").push({
             "service":"training",
             "breed":breed,
