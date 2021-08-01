@@ -45,7 +45,8 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
     }
 
     function welcome(agent){
-        agent.add(`We provide a variety of services
+        agent.add(`hello from tobilogrooming services 
+            We provide a variety of services
             Dog grooming, dog spa, dog behavioural training
             
             Dog grooming: full shave or customised? Please provide details.
@@ -77,6 +78,14 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
         agent.add(new Suggestion("premium"))  //
         agent.add(new Suggestion("basic"))   //
 
+    }
+
+    function haircut(agent){
+        agent.add("we provide full shave , customized pattern , specific request which type of shave do you want ?")
+
+        agent.add(new Suggestion("customized pattern"))  //
+        agent.add(new Suggestion("full shave"))   //
+        agent.add(new Suggestion("specific requests"))  //
     }
 
 
@@ -161,7 +170,7 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
     }
 
 
-    function haircut(agent){
+    function fullshave(agent){
         // let user_name= agent.parameters["person"].name;       // is ka mtlb person ka peremeter fetch huga consoe ki trha yhn pr  // object hai isko convert krna parayga (.name  laga kr)
         let breed=agent.parameters["any"];
         let height=agent.parameters["unit-length"];  
@@ -170,7 +179,6 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
         let haircu_type=agent.parameters["haircut"];
         // console.log(typeof(height),height)
         console.log("Package is   Basic","\n" + "breed is   "+breed,"\n" + "Phone number is    "+phone_number+"\n","hieght is    ",height)          
-
 
         return admin.database().ref("/users").push({
             "service":"haircut",
@@ -186,6 +194,29 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
         }).catch();  
     }
 
+    function customized(agent){
+        // let user_name= agent.parameters["person"].name;       // is ka mtlb person ka peremeter fetch huga consoe ki trha yhn pr  // object hai isko convert krna parayga (.name  laga kr)
+        let request =agent.parameters["any1"]
+        let breed=agent.parameters["any"];
+        let height=agent.parameters["unit-length"];  
+        let phone_number=agent.parameters["phone-number"];
+        // console.log(typeof(height),height)
+        let age =agent.parameters["age"];
+        console.log("Package is   Basic","\n" + "breed is   "+breed,"\n" + "Phone number is    "+phone_number+"\n","hieght is    ",height)          
+
+        return admin.database().ref("/users").push({
+            "shave":"customized",
+            "request":request,
+            "breed":breed,
+            "height":height,
+            "phone number":phone_number,
+            "age":age
+        }).then((snapshot)=>{
+            console.log("sucessfuly write into db"+snapshot.ref.toString());
+            agent.add("your query is registered you will recive sms shortly on ",phone_number);
+
+        }).catch();  
+    }
 
     function boarding(agent){
         // let user_name= agent.parameters["person"].name;       // is ka mtlb person ka peremeter fetch huga consoe ki trha yhn pr  // object hai isko convert krna parayga (.name  laga kr)
@@ -208,6 +239,7 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
 
         }).catch();  
     }
+
 
 
     function training(agent){
@@ -241,9 +273,14 @@ app.post("/webhook",express.json(),(request,response)=>{          //fulfillment 
     intentMap.set("basic package",basic);
     intentMap.set("getadress",getfromfirebase);  //added
     intentMap.set("health",health);
-    intentMap.set("hair-cut",haircut);
+    intentMap.set("full-shave",fullshave);
     intentMap.set("boarding",boarding);
     intentMap.set("dog-training",training);
+    intentMap.set("haircut",haircut);
+    intentMap.set("specific request",customized);
+    intentMap.set("customized pattern",customized);
+    
+
     agent.handleRequest(intentMap)
 })
 
